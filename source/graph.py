@@ -38,4 +38,44 @@ def parse(raw_file, delimiter):
     
     return parsed_data
 
-#TODO - def visualize_days()
+def visualize_days():
+    """Visualize data by day of week"""
+
+    #Grab parsed data
+    data_file = parse(MY_FILE, ",")
+
+    #Make countervariable to count how many incidents
+    #happen per week by iterating through parsed data
+    counter = Counter(item["DayOfWeek"] for item in data_file)
+
+    #Seperate x-axis data (day of week) from "counter" 
+    #variable from y-axis data (number of incidents)
+    data_list = [
+                counter["Monday"],
+                counter["Tuesday"],
+                counter["Wednesday"],
+                counter["Thursday"],
+                counter["Friday"],
+                counter["Saturday"],
+                counter["Sunday"],
+                ]
+
+    day_tuple = tuple(["Mon", "Tue", "Wed", "Thurs", "Fri", "Sat", "Sun"])
+
+    #Assign y-axis data to matplotlib plot instance
+    plt.plot(data_list)
+
+    #Create amount of ticks needed for x-axis, assign labesl
+    plt.xticks(range(len(day_tuple)), day_tuple)
+
+    #Save plot
+    plt.savefig("Days.png")
+
+    #Close plot file
+    plt.clf()
+
+def main():
+    visualize_days()
+
+if __name__ == "__main__":
+    main()
