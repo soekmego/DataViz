@@ -19,7 +19,7 @@ def parse(raw_file, delimiter):
     open_file = open(raw_file)
     
     #Read CSV file
-    csv_data = csv.reader(opened_file, delimiter=delimiter)
+    csv_data = csv.reader(open_file, delimiter=delimiter)
     
     #Setup empty list
     parsed_data = []
@@ -32,7 +32,7 @@ def parse(raw_file, delimiter):
         parsed_data.append(dict(zip(fields, row)))
 
     #Close CSV file
-    opened_file.close()
+    open_file.close()
     
     return parsed_data
 
