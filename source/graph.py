@@ -89,10 +89,12 @@ def visualize_type():
     #Set where label hits x-axis
     xlocations = np.arange(len(labels)) + 0.5
 
+    #Width of each bar that will be plotted
     width = 0.5
 
-    #Width of each bar that will be plotted
     #Assign data to a bar plot
+    plt.bar(xlocations, counter.values(), width=width)
+    
     #Assign label and tick location to x-axis
     plt.xticks(xlocations + width / 2, labels, rotation=90)
 
