@@ -12,7 +12,7 @@ import csv
 import matplotlib.pyplot as plt
 import numpy as np
 
-MY_FILE = "../data/sammple_sfpd_incident_all.csv"
+MY_FILE = "../data/sample_sfpd_incident_all.csv"
 
 def parse(raw_file, delimiter):
     """Parse a raw CSV file to JSON-like object."""
@@ -21,7 +21,7 @@ def parse(raw_file, delimiter):
     open_file = open(raw_file)
     
     #Read CSV file
-    csv_data = csv.reader(opened_file, delimiter=delimiter)
+    csv_data = csv.reader(open_file, delimiter=delimiter)
     
     #Setup empty list
     parsed_data = []
@@ -34,7 +34,7 @@ def parse(raw_file, delimiter):
         parsed_data.append(dict(zip(fields, row)))
 
     #Close CSV file
-    opened_file.close()
+    open_file.close()
     
     return parsed_data
 
@@ -87,21 +87,23 @@ def visualize_type():
     labels = tuple(counter.keys())
 
     #Set where label hits x-axis
-    xlocations = np.arrange(len(labels)) + 5
+    xlocations = np.arange(len(labels)) + 0.5
+
+    width = 0.5
 
     #Width of each bar that will be plotted
     #Assign data to a bar plot
     #Assign label and tick location to x-axis
-    plt.xticks(xlocations + Width / 2, labels, rotation=90)
+    plt.xticks(xlocations + width / 2, labels, rotation=90)
 
     #Give room enough so x-axis wont be cut off on graph
-    plt.subplot_adjust(bottom=0.4)
+    plt.subplots_adjust(bottom=0.4)
 
     #Make overall graph large enough
     plt.rcParams["figure.figsize"] = 12, 8
 
     #Save graph
-    plt.savefig()
+    plt.savefig("Type.png")
 
     #Close plot figure
     plt.clf()
